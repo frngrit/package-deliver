@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "npm run start --prefix frontend"
+    "client": "npm run start --prefix frontend",
+    "server": "concurrently  \"docker compose up\" \"npm install && npm run start --prefix backend\"",
+    "start": "concurrently \"npm install && npm run start --prefix backend\" \"npm install && npm run start --prefix frontend\""
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.1"
+  }
 }
