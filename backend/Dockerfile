@@ -14,6 +14,8 @@ RUN npm install
 
 # Bundle app source
 COPY . .
+RUN echo DATABASE_PORT
+ENV DATABASE_PORT=3306 DATABASE_HOST=localhost DATABASE_USER=user DATABASE_PASSWORD=password DATABASE_NAME=package_db
 
 EXPOSE 8081
 CMD [ "node", "server.js" ]

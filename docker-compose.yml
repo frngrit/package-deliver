@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   db:
     image: mysql
@@ -13,6 +14,26 @@ services:
       - 3307:3306
     volumes:
       - mysqldb:/var/lib/mysql
-# Names our volume
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 3
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: backend
+    ports:
+      - "8081:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Update the database host to the service name "db"
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: package_db
 volumes:
   mysqldb:

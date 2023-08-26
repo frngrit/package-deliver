@@ -5,11 +5,11 @@ const path = require('path');
 
 var pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    port: 3307,
-    user: 'root',
-    password: 'password',
-    database: 'package_db',
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
     multipleStatements: true
 });
 
