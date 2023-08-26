@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./components/Navbar";
 import Parcels from "./Pages/Parcels";
 import Home from "./Pages/Home";
+import Admin from "./Pages/Admin";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/parcels",
         element: <Parcels />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
       {
         path: "/",

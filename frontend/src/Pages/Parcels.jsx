@@ -1,4 +1,6 @@
 import React from "react";
+import Checkbox from '@mui/material/Checkbox';
+
 
 function Parcels() {
   return (
@@ -20,7 +22,7 @@ function Parcels() {
             <td className="td">K'Frank</td>
             <td className="td">5/191</td>
             <td className="td">
-              <input type="checkbox" />
+              <Checkbox color="success" />
             </td>
           </tr>
         </tbody>

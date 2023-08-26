@@ -25,6 +25,21 @@ code {
   padding: 16px 32px;
 }
 
+.div2 {
+  margin: auto -16px;
+  padding: 40px 32px;
+}
+
+
+.center {
+  margin: auto;
+  width: 40%;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: beige;
+}
+
 .ul {
   list-style-type: none;
   margin: 0;
