@@ -35,5 +35,13 @@ services:
       DATABASE_USER: user
       DATABASE_PASSWORD: password
       DATABASE_NAME: package_db
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "3050:80"
+    depends_on:
+      - backend
 volumes:
   mysqldb:
