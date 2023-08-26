@@ -1,8 +1,27 @@
-import React from "react";
-import Checkbox from '@mui/material/Checkbox';
-
+import React, { useEffect } from "react";
+import Checkbox from "@mui/material/Checkbox";
+import axios from "axios";
+import { useState } from "react";
 
 function Parcels() {
+  const [parcels, setParcels] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await axios.get("http://localhost:8081/api/packages");
+        const { data } = result;
+        setParcels(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    getData();
+  }, []);
+
+  console.log(parcels);
+
   return (
     <div className="div">
       <table className="table" width="100%">
@@ -16,15 +35,19 @@ function Parcels() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="td">26/08/2023</td>
-            <td className="td">TH2332312134</td>
-            <td className="td">K'Frank</td>
-            <td className="td">5/191</td>
-            <td className="td">
-              <Checkbox color="success" />
-            </td>
-          </tr>
+          {parcels.map((value, index) => {
+            return (
+              <tr key={index}>
+                <td className="td">{value.CreatedAt}</td>
+                <td className="td">{value.TrackingNo}</td>
+                <td className="td">{value.OwnerId}</td>
+                <td className="td">{value.RoomId}</td>
+                <td className="td">
+                  <Checkbox color="success" />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
