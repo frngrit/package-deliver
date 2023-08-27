@@ -1,4 +1,4 @@
-const query = require("../config/db")
+const { query } = require("../config/db")
 
 const getOwners = async (req, res) => {
     const sql = `SELECT * FROM package_db.Owners;`

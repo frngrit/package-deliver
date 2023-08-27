@@ -1,8 +1,8 @@
 const express = require("express");
-const { getPackages } = require("../controllers/package.controller")
+const { getPackages, createPackages } = require("../controllers/package.controller")
 
 
 const router = express.Router();
-router.route('/').get(getPackages);
+router.route('/').get(getPackages).post(createPackages);
 
 module.exports = router

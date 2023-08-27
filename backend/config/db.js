@@ -32,5 +32,15 @@ const query = (command) => new Promise((resolve, reject) => {
     })
 })
 
+const insert = (command, values) => new Promise((resolve, reject) => {
+    pool.query(command, values, (err, results, fields) => {
+        if (err) reject(err);
+        resolve(results)
+    })
+})
 
-module.exports = query;
+
+module.exports = {
+    query,
+    insert
+};

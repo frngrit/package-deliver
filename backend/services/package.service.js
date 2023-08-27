@@ -6,8 +6,15 @@ const packageService = (packageRepository) => {
         return result;
     }
 
+    const createPackages = async (payload) => {
+        const result = await packageRepository.createPackages(payload);
+
+        return result;
+    }
+
     return {
-        getPackages
+        getPackages,
+        createPackages
     }
 }
 
