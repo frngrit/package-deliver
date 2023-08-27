@@ -6,6 +6,7 @@
   "scripts": {
     "pretest": "npm install",
     "prestart": "npm install",
+    "preunit-test": "npm install",
     "start": "nodemon server.js",
     "test": "jest --watchAll --coverage",
     "unit-test": "jest"
