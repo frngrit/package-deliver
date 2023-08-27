@@ -28,7 +28,7 @@ jobs:
       #   run: make test-e2e
 
       - name: Build Backend the Docker image
-        run: docker build ./backend --file Dockerfile --tag ghcr.io/frngrit/workshop/backend:${{ env.GITHUB_SHA }}
+        run: docker build ./backend --tag ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
 
       - name: Login ghcr.io
         uses: docker/login-action@v2.1.0
@@ -43,7 +43,7 @@ jobs:
         with:
           context: .
           tags: |
-            ghcr.io/frngrit/workshop/backend:${{ env.GITHUB_SHA }}
+            ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
           push: true
 
       - name: Image digest
