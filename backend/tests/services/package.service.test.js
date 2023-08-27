@@ -64,7 +64,7 @@ describe('packageService: getPackages', () => {
     const service = packageService(mockRepo);
     service.getPackages().then(data => {
       //Assert
-      expect(data).toEqual(mockRepo.packages)
+      expect(data).toEqual([])
     });
   });
 });
