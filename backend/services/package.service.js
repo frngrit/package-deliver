@@ -1,11 +1,15 @@
-const packageRepository = require("../repositories/package.repository")
+const packageService = (packageRepository) => {
+    
+    const getPackages = async () => {
+        const result = await packageRepository.getPackages();
 
-const getPackages = async () => {
-    const result = await packageRepository.getPackages();
+        return result;
+    }
 
-    return result;
+    return {
+        getPackages
+    }
 }
 
-module.exports = {
-    getPackages
-}
+
+module.exports = packageService;

@@ -7,7 +7,8 @@
     "pretest": "npm install",
     "prestart": "npm install",
     "start": "nodemon server.js",
-    "test": "jest --watchAll --coverage"
+    "test": "jest --watchAll --coverage",
+    "unit-test": "jest"
   },
   "author": "frngrit",
   "license": "MIT",
