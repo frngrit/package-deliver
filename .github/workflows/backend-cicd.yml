@@ -58,7 +58,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          repository: frngrit/devops-argocd
+          repository: frngrit/delivery_argocd
           persist-credentials: false
           fetch-depth: 0
       - name: change image tag
@@ -73,5 +73,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT }}
-          repository: frngrit/devops-argocd
+          repository: frngrit/delivery_argocd
           branch: main
