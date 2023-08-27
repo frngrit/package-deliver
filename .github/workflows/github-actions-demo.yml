@@ -41,7 +41,7 @@ jobs:
       - name: Push to GitHub Container Registry
         uses: docker/build-push-action@v3.2.0
         with:
-          context: .
+          context: ./backend
           tags: |
             ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
           push: true
