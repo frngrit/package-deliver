@@ -18,8 +18,8 @@ jobs:
       - name: Setup SHA
         run: echo "GITHUB_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
 
-      # - name: Unit test
-      #   run: make test-unit
+      - name: Unit test
+        run: make backend-unit-test
 
       # - name: Integration test inside Docker-compose
       #   run: make test-integration
