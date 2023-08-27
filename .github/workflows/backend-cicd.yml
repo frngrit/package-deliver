@@ -1,4 +1,4 @@
-name: Dev environment CI and CD
+name: Backend CI/CD
 
 on:
   push:
