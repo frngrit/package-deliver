@@ -48,3 +48,30 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+  # ==============
+  # CD DEV task
+  # ==============
+  gitops-versioning:
+    runs-on: ubuntu-latest
+    needs: build-and-push-docker-image
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          repository: frngrit/devops-argocd
+          persist-credentials: false
+          fetch-depth: 0
+      - name: change image tag
+        run: |
+          git --version
+          git config user.name "frngrit"
+          git config user.email "frank.12876@hotmail.com"
+          sed -i -E "s/ghcr.io\/frngrit\/package-deliver.*$/ghcr.io\/frngrit\/package-deliver:${GITHUB_SHA}/" kube-gitops/deployment.yml
+          git add kube-gitops/deployment.yml
+          git commit -m "🤖 change docker image version to ${GITHUB_SHA}"
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          repository: frngrit/devops-argocd
+          branch: main
