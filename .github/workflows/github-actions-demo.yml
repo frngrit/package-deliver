@@ -1,18 +1,50 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Dev environment CI and CD
+
+on:
+  push:
+    branches: [main, hotfix]
+
 jobs:
-  Explore-GitHub-Actions:
+  # ==============
+  # CI task
+  # ==============
+  build-and-push-docker-image:
+    name: Build Docker image and push to repositories
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      - name: checkout
         uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      
+      - name: Setup SHA
+        run: echo "GITHUB_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      # - name: Unit test
+      #   run: make test-unit
+
+      # - name: Integration test inside Docker-compose
+      #   run: make test-integration
+      
+      # - name: E2E test inside Docker-compose
+      #   run: make test-e2e
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ghcr.io/<your-github-account>/workshop:${{ env.GITHUB_SHA }}
+
+      - name: Login ghcr.io
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.WORKFLOW_TOKEN }}
+          logout: true
+      
+      - name: Push to GitHub Container Registry
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: .
+          tags: |
+            ghcr.io/<your-github-account>/workshop:${{ env.GITHUB_SHA }}
+          push: true
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
