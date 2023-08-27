@@ -1,8 +1,8 @@
 const express = require("express");
-const { getOwners } = require("../controllers/owner.controller")
+const ownerController = require("../controllers/owner.controller")
 
 
 const router = express.Router();
-router.route('/').get(getOwners);
+router.route('/').get(ownerController.getOwners);
 
 module.exports = router
