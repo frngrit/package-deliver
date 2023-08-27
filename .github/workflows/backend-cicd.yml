@@ -2,7 +2,7 @@ name: Dev environment CI and CD
 
 on:
   push:
-    branches: [main, hotfix]
+    branches: [main]
 
 jobs:
   # ==============
