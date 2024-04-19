@@ -9,12 +9,12 @@ function Admin() {
     PhoneNumber: "",
     RoomId: "",
     TrackingNo: "",
-    Name: "",
   });
   
   const handleSubmit = async (event) => {
     const payload = {...data}
-    payload.OwnerId = +payload.OwnerId
+    payload.OwnerId = +payload.OwnerId || 0
+    console.log(payload)
     const response = await axios.post("http://localhost:8081/api/packages", [payload])
     console.log(response);
   };
@@ -46,7 +46,7 @@ function Admin() {
           <p>
             <label>
               &emsp;&emsp;&emsp; Owner's Name : &emsp;
-              <input type="text" id="Name" onChange={onChange} value={data.Name}/>
+              <input type="text" id="OwnerId" onChange={onChange} value={data.OwnerId}/>
             </label>
           </p>
           <p>
