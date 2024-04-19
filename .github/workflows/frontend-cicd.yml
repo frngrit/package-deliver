@@ -29,6 +29,7 @@ jobs:
       - name: Build Frontend the Docker image
         run: |
           ls
+          cd frontend
           docker build . -f ./frontend/Dockerfile --tag ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }} --progress=plain --no-cache
       
       - name: Login ghcr.io
