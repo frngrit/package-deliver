@@ -13,7 +13,7 @@ function Admin() {
   });
   
   const handleSubmit = async (event) => {
-    const response = await axios.post("http://localhost:8081/api/packages", data)
+    const response = await axios.post("http://localhost:8081/api/packages", [data])
     console.log(response);
   };
 
