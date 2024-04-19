@@ -1,7 +1,5 @@
 # Stage 1: Build the React app
-FROM node:18
-
-# Create app directory
+FROM node:18 as build
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN cat package.json
