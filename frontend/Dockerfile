@@ -1,9 +1,10 @@
 # Stage 1: Build the React app
-FROM node:16 as build
+FROM node:18 as build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
+RUN npm run
 RUN npm run build
 
 # Stage 2: Create the production image
