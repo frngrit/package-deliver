@@ -41,12 +41,20 @@ jobs:
           password: ${{ secrets.WORKFLOW_TOKEN }}
           logout: true
       
-      - name: Push to GitHub Container Registry
+      - name: Push Backend Image to GitHub Container Registry
         uses: docker/build-push-action@v3.2.0
         with:
           context: ./backend
           tags: |
             ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
+          push: true
+      
+      - name: Push Frontend Image to GitHub Container Registry
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: ./frontend
+          tags: |
+            ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }}
           push: true
 
       - name: Image digest
