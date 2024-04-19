@@ -4,8 +4,13 @@ const PORT = 8081;
 var cors = require('cors')
 require("dotenv").config();
 
+var morgan = require('morgan')
+morgan('tiny')
+morgan(':method :url :status :res[content-length] - :response-time ms')
+
 app.use(cors())
 app.use(express.json())
+app.use(morgan('combined'))
 
 app.get('/test', (req, res) => res.json({'message': 'hello'}));
 
