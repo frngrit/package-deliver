@@ -13,7 +13,9 @@ function Admin() {
   });
   
   const handleSubmit = async (event) => {
-    const response = await axios.post("http://localhost:8081/api/packages", [data])
+    const payload = {...data}
+    payload.OwnerId = +payload.OwnerId
+    const response = await axios.post("http://localhost:8081/api/packages", [payload])
     console.log(response);
   };
 
