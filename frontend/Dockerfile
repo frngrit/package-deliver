@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run
+RUN npm install
 RUN npm run build
 
 # Stage 2: Create the production image

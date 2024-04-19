@@ -25,7 +25,9 @@ jobs:
       #   run: make test-e2e
 
       - name: Build Frontend the Docker image
-        run: docker build . -f ./frontend/Dockerfile --tag ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }}
+        run: |
+          cd ./frontend
+          docker build . -f ./frontend/Dockerfile --tag ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }}
       
       - name: Login ghcr.io
         uses: docker/login-action@v2.1.0
