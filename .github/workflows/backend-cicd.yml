@@ -30,9 +30,6 @@ jobs:
       - name: Build Backend the Docker image
         run: docker build . -f ./backend/Dockerfile --tag ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
       
-      - name: Build Frontend the Docker image
-        run: docker build . -f ./frontend/Dockerfile --tag ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }}
-
       - name: Login ghcr.io
         uses: docker/login-action@v2.1.0
         with:
@@ -49,14 +46,6 @@ jobs:
             ghcr.io/frngrit/package-deliver/backend:${{ env.GITHUB_SHA }}
           push: true
       
-      - name: Push Frontend Image to GitHub Container Registry
-        uses: docker/build-push-action@v3.2.0
-        with:
-          context: ./frontend
-          tags: |
-            ghcr.io/frngrit/package-deliver/frontend:${{ env.GITHUB_SHA }}
-          push: true
-
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
   # ==============
