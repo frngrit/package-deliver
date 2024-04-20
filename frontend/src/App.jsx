@@ -6,7 +6,8 @@ import Admin from "./Pages/Admin";
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet
+  Outlet,
+  Navigate,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -27,29 +28,32 @@ const router = createBrowserRouter([
         element: <Admin />,
       },
       {
-        path: "/",
-        element: <>404 page not found</>,
+        path: "/*",
+        element: <Navigate to={"/home"} />,
       },
-    ]
-  }
+      {
+        path: "/",
+        element: <Navigate to={"/home"} />,
+      },
+    ],
+  },
 ]);
-
 
 function App() {
   return (
     <>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </>
   );
 }
 
-function NavbarWrapper(){
+function NavbarWrapper() {
   return (
-  <div>
-      <NavBar/>
-      <Outlet/>
-  </div>
-  )
-};
+    <div>
+      <NavBar />
+      <Outlet />
+    </div>
+  );
+}
 
 export default App();
