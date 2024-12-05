@@ -59,6 +59,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.PAT }}
           repository: frngrit/delivery_argocd
           persist-credentials: false
           fetch-depth: 0
