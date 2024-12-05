@@ -2,7 +2,8 @@
 FROM node:18 as build
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN cat package.json
+ARG REACT_APP_NOT_SECRET_CODE
+ENV REACT_APP_NOT_SECRET_CODE=$REACT_APP_NOT_SECRET_CODE
 COPY . .
 RUN npm install
 RUN npm run build
